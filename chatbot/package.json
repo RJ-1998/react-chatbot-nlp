@@ -1,0 +1,52 @@
+{
+  "name": "chatbot",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@tensorflow-models/qna": "^1.0.0",
+    "@tensorflow/tfjs": "^3.8.0",
+    "@tensorflow/tfjs-converter": "^3.7.0",
+    "@tensorflow/tfjs-core": "^3.7.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "md5": "^2.3.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "buildNlp": "browserify ./buildable.js | terser --compress --mangle > ./dist/bundle.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@nlpjs/core": "^4.22.0",
+    "@nlpjs/lang-en-min": "^4.22.0",
+    "@nlpjs/nlp": "^4.22.0",
+    "@nlpjs/request-rn": "^4.21.1",
+    "browserify": "^17.0.0",
+    "terser": "^5.7.1"
+  }
+}
