@@ -1,4 +1,5 @@
-import * as tf from "@tensorflow/tfjs";
+// import * as tf from "@tensorflow/tfjs";
+import { tensor1d } from "@tensorflow/tfjs";
 import faq from "./intents.json";
 import md5 from "md5";
 
@@ -16,6 +17,7 @@ const intent_label_map = {
 };
 const vocab_length = 66;
 const maxlen = 7;
+const THRESHOLD = 0.1;
 
 // tokenize the sentence
 const _tokenizer = (sentence) => {
@@ -55,7 +57,6 @@ export const predict_answer = (sentence, model) => {
   // step 2: remove stopwords and stemming
   // step 3: convert to one_hot encoding pf sentence
   const embedded_sentence = one_hot(tokens);
-  // step 4: pad sequence of the one_hot representation
   // step 5: maybe convert tensor representation
   //   const embedded_tensor = tf.tensor(embedded_sentence);
   //   let padded_sequence = tf.pad(embedded_sentence, [
@@ -65,12 +66,38 @@ export const predict_answer = (sentence, model) => {
   // step 6: predict the answer using the model
   // let padded_sequence = tf.broadcastTo(pad_sequence(embedded_sentence), [1, 7]);
   // console.log(padded_sequence.print());
-  let tensor = tf
-    .tensor1d(pad_sequence(embedded_sentence), "float32")
-    .expandDims(0)
-    .reshape([-1, 7]);
+  // step 4: pad sequence of the one_hot representation
+  let tensor = tensor1d(pad_sequence(embedded_sentence), "float32").expandDims(
+    0
+  );
 
-  model.predict(tensor);
+  const _x = model.predict(tensor).dataSync();
+  const _res = Array.from(_x);
+  let results = [];
   // step 7: get the probabilities of the question
+  for (let i = 0; i < _res.length; i++) {
+    if (_res[i] >= THRESHOLD) {
+      results.push([i, _res[i]]);
+    }
+  }
+  results.sort(function (a, b) {
+    return b[1] - a[1]; // sort in descending order
+  });
   // step 8: return the random answer from intent.json
+  let response = "";
+  for (const [key, value] of Object.entries(intent_label_map)) {
+    if (value == results[0][0]) {
+      for (const intent of faq.intents) {
+        if (intent.tag == key) {
+          response =
+            intent.responses[
+              Math.floor(Math.random() * intent.responses.length)
+            ];
+          break;
+        }
+      }
+    }
+  }
+
+  console.log(response);
 };

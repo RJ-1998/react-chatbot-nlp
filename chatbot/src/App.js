@@ -5,14 +5,14 @@ import { predict_answer } from "./util";
 
 function App() {
   useEffect(async () => {
-    let outputs_ = [];
-    let emodel;
     const model = await tf.loadLayersModel(
       "http://localhost:4001/static/model.json"
     );
-    outputs_ = [model.output, model.getLayer("dense_1").output];
-    emodel = tf.model({ inputs: model.input, outputs: outputs_ });
-    predict_answer("hello! world", emodel);
+    // let outputs_ = [];
+    // let emodel;
+    // outputs_ = [model.output, model.getLayer("dense_1").output];
+    // emodel = tf.model({ inputs: model.input, outputs: outputs_ });
+    predict_answer("tell me a joke joke joke joke", model);
   }, []);
 
   return (
