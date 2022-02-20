@@ -1,0 +1,114 @@
+@import url("https://unpkg.com/open-props");
+
+.header {
+  background-color: var(--violet-4);
+  display: flex;
+  justify-content: center;
+
+  h2 {
+    color: #fff;
+    padding: 10px;
+
+    img {
+      height: 40px;
+      width: 40px;
+      padding-right: 10px;
+    }
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  width: 400px;
+  background-color: var(--violet-1);
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.heading {
+  padding: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: var(--violet-4);
+  height: max-content;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.chat_area {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.chat_inputs {
+  display: flex;
+  height: max-content;
+  margin-bottom: 5px;
+  height: max-content;
+  margin: 5px 10px;
+
+  input[type="text"] {
+    flex-grow: 1;
+    height: max-content;
+    padding: 10px;
+    border: 1px var(--violet-1) solid;
+    font-size: var(--font-size-1);
+  }
+
+  input[type="submit"] {
+    background-color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px var(--violet-1) solid;
+    padding: 10px;
+    margin-left: 10px;
+    font-size: var(--font-size-1);
+  }
+
+  input[type="submit"]:hover {
+    background-color: var(--violet-8);
+    color: #fff;
+  }
+}
+
+.message_area {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  // background-color: #fff;
+}
+
+.mssg_recv {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 5px;
+}
+
+.mssg_send {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.message {
+  padding: 10px;
+  background-color: var(--violet-5);
+  color: #fff;
+  border-radius: 0.5em;
+  width: 50%;
+  font-size: 11pt;
+}
+
+.status {
+  font-style: italic;
+  font-size: small;
+}

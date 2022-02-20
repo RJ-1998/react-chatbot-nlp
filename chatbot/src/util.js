@@ -86,9 +86,9 @@ export const predict_answer = (sentence, model) => {
   // step 8: return the random answer from intent.json
   let response = "";
   for (const [key, value] of Object.entries(intent_label_map)) {
-    if (value == results[0][0]) {
+    if (value === results[0][0]) {
       for (const intent of faq.intents) {
-        if (intent.tag == key) {
+        if (intent.tag === key) {
           response =
             intent.responses[
               Math.floor(Math.random() * intent.responses.length)
@@ -99,5 +99,5 @@ export const predict_answer = (sentence, model) => {
     }
   }
 
-  console.log(response);
+  return response;
 };
